@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-xml-info"
+description = "Enables the xml_info command without any pre-configured scope."
+commands.allow = ["xml_info"]
+
+[[permission]]
+identifier = "deny-xml-info"
+description = "Denies the xml_info command without any pre-configured scope."
+commands.deny = ["xml_info"]

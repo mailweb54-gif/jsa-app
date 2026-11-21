@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-xml-read"
+description = "Enables the xml_read command without any pre-configured scope."
+commands.allow = ["xml_read"]
+
+[[permission]]
+identifier = "deny-xml-read"
+description = "Denies the xml_read command without any pre-configured scope."
+commands.deny = ["xml_read"]

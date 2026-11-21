@@ -1,0 +1,25 @@
+name: App Mac (dmg)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin,x86_64-apple-darwin
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx tauri build --target universal-apple-darwin --bundles dmg
+      - run: cp src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg JSA-Channels-Mac.dmg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: JSA-Channels-Mac
+          path: JSA-Channels-Mac.dmg

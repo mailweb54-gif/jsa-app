@@ -1,0 +1,28 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "dashboard",
+  "description": "La dashboard JSA (sito o server di casa) puo' usare la cartella download dell'app",
+  "windows": ["main"],
+  "remote": {
+    "urls": [
+      "https://music.jsadjsteam.com/*",
+      "https://*.jsadjsteam.com/*",
+      "http://127.0.0.1:*/*",
+      "http://localhost:*/*",
+      "http://192.168.*.*:*/*"
+    ]
+  },
+  "permissions": [
+    "core:default",
+    "allow-app-info",
+    "allow-get-folder",
+    "allow-pick-folder",
+    "allow-file-exists",
+    "allow-save-file",
+    "allow-open-folder",
+    "allow-xml-info",
+    "allow-xml-pick",
+    "allow-xml-read",
+    "allow-xml-sent"
+  ]
+}

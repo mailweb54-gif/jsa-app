@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-xml-sent"
+description = "Enables the xml_sent command without any pre-configured scope."
+commands.allow = ["xml_sent"]
+
+[[permission]]
+identifier = "deny-xml-sent"
+description = "Denies the xml_sent command without any pre-configured scope."
+commands.deny = ["xml_sent"]
