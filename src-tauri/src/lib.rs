@@ -304,6 +304,30 @@ fn xml_sent(state: State<'_, AppState>, user: String, path: String, sig: String)
     state.store();
 }
 
+/// 21/11/2026 - "Versioni in rekordbox": legge un brano della collezione dal disco di questo PC
+/// (D:\Consolle ha lo stesso percorso su SERVER, PcStudio e V3) e lo passa alla dashboard, che lo suona.
+/// Solo file audio; se il file qui non c'e' la dashboard lo prende dal server.
+#[tauri::command]
+async fn local_audio(path: String) -> Result<tauri::ipc::Response, String> {
+    let p = PathBuf::from(path.trim());
+    let ext = p
+        .extension()
+        .map(|e| e.to_string_lossy().to_lowercase())
+        .unwrap_or_default();
+    const AUDIO: [&str; 9] = ["mp3", "m4a", "mp4", "aac", "wav", "flac", "aif", "aiff", "ogg"];
+    if !AUDIO.contains(&ext.as_str()) {
+        return Err("non e' un file audio".into());
+    }
+    if !p.is_file() {
+        return Err("file non trovato su questo PC".into());
+    }
+    let bytes = tauri::async_runtime::spawn_blocking(move || fs::read(&p))
+        .await
+        .map_err(|e| e.to_string())?
+        .map_err(|e| format!("file non leggibile: {e}"))?;
+    Ok(tauri::ipc::Response::new(bytes))
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -318,7 +342,8 @@ pub fn run() {
             xml_info,
             xml_pick,
             xml_read,
-            xml_sent
+            xml_sent,
+            local_audio
         ])
         .setup(|app| {
             let file = app

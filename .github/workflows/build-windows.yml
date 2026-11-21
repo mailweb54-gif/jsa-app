@@ -1,0 +1,24 @@
+name: App Windows (setup)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx tauri build --bundles nsis
+      - shell: pwsh
+        run: Copy-Item (Get-ChildItem src-tauri/target/release/bundle/nsis/*.exe | Select-Object -First 1).FullName JSA-Channels-Windows-Setup.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: JSA-Channels-Windows
+          path: JSA-Channels-Windows-Setup.exe

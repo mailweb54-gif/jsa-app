@@ -12,6 +12,7 @@ fn main() {
             "xml_pick",
             "xml_read",
             "xml_sent",
+            "local_audio",
         ]),
     ))
     .expect("errore in tauri-build");

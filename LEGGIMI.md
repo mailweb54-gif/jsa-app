@@ -37,7 +37,7 @@ Chrome a ogni riapertura bisogna riconfermare il permesso. Nell'app i brani li s
 - Dashboard: blocco `appxml-20261121` (copia `index.html.bak-20261121-appxml`).
 
 ## Ricompilare
-- **Windows** (fatto dal cloud con cargo-xwin): `npx tauri build --runner cargo-xwin --target x86_64-pc-windows-msvc`
+- **Windows**: GitHub Actions, workflow "App Windows (setup)" (artefatto `JSA-Channels-Windows`); in alternativa dal cloud con cargo-xwin `npx tauri build --runner cargo-xwin --target x86_64-pc-windows-msvc`
   oppure su un PC Windows con Rust + Node: `npm install` e `npx tauri build`.
 - **Mac**: copiare la cartella `JSA-App` su un Mac e fare doppio clic su `Crea-App-Mac.command`
   (installa da solo gli strumenti; il .dmg esce sulla Scrivania e va bene per Mac Intel e Apple Silicon).

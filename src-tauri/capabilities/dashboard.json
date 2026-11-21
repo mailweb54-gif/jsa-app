@@ -23,6 +23,7 @@
     "allow-xml-info",
     "allow-xml-pick",
     "allow-xml-read",
-    "allow-xml-sent"
+    "allow-xml-sent",
+    "allow-local-audio"
   ]
 }
